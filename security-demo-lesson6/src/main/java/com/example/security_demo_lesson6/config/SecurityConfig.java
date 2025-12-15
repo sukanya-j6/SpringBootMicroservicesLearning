@@ -14,12 +14,12 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         var user = User.withUsername("user")
-                .password("{noop}password")
+                .password("{noop}user123")
                 .roles("USER")
                 .build();
 
         var admin = User.withUsername("admin")
-                .password("{noop}password")
+                .password("{noop}admin123")
                 .roles("ADMIN")
                 .build();
 
@@ -32,6 +32,8 @@ public class SecurityConfig {
                 auth.requestMatchers("/admin")
                         .hasRole("ADMIN")
                         .requestMatchers("/user")
+                        .hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/")
                         .hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated())
                 .formLogin();

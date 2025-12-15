@@ -10,7 +10,7 @@ public class RoleController {
     public String index() {
         return "Hello World";
     }
-    
+
     @GetMapping("/user")
     public String userApi(){
         return "user api";
